@@ -17,16 +17,16 @@ public class GooglePractice {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        tNode grandpa = new tNode(getRandom());
-        tNode pa = new tNode(getRandom());
-        tNode mom = new tNode(getRandom());
-        tNode granchild1 = new tNode(getRandom());
-        tNode granchild2 = new tNode(getRandom());
-        tNode granchild3 = new tNode(getRandom());
-        tNode granchild4 = new tNode(getRandom());
+        tNode grandpa = new tNode(1);
+        tNode pa = new tNode(2);
+        tNode mom = new tNode(3);
+        tNode granchild1 = new tNode(4);
+        tNode granchild2 = new tNode(5);
+        tNode granchild3 = new tNode(6);
+        tNode granchild4 = new tNode(7);
         
         pa.setRightAndLeft(granchild1, granchild2);
-        mom.setRightAndLeft(granchild4, granchild3);
+        mom.setRightAndLeft(null, granchild3);
         
         grandpa.setRightAndLeft(pa, mom);  
         
@@ -42,9 +42,9 @@ public class GooglePractice {
             return null;
         
         if(node.getLeft() == null && node.getRight() == null){
-            list.push(node.getValue());
+            list.add(node.getValue());
             lists = new LinkedList();
-            lists.push(list);
+            lists.add(list);
             return lists;
         }
         LinkedList<LinkedList<Integer>> listsRight = null;
@@ -57,7 +57,7 @@ public class GooglePractice {
         
         lists = mergeLists(listsRight, listsLeft);        
         
-        list.push(node.getValue());
+        list.add(node.getValue());
         lists.push(list);
         return lists;
     }
@@ -78,12 +78,12 @@ public class GooglePractice {
             length = lLength;
         
         for(int i = 0; i < length; i++){
-            if(rLength < i)
-                lists.push(mergeList(null, left.get(i)));
-            else if(lLength < i)
-                lists.push(mergeList(right.get(i), null));
+            if(rLength <= i)
+                lists.add(mergeList(null, left.get(i)));
+            else if(lLength <= i)
+                lists.add(mergeList(right.get(i), null));
             else
-                lists.push(mergeList(right.get(i), left.get(i)));
+                lists.add(mergeList(right.get(i), left.get(i)));
         }                        
         return lists;
     }
@@ -98,7 +98,7 @@ public class GooglePractice {
         
         list = right;
         for(int i = 0; i < left.size(); i++)
-            list.push(left.get(i));
+            list.add(left.get(i));
             
         return list;
     }
